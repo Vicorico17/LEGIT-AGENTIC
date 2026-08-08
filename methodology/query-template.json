@@ -1,0 +1,29 @@
+{
+  "brand": "Example Brand",
+  "domain": "example.com",
+  "market": "US",
+  "language": "en",
+  "engines": ["ChatGPT", "Perplexity", "Claude", "Gemini", "Google AI"],
+  "runsPerQuery": 3,
+  "queries": [
+    { "id": "discover-1", "intent": "discovery", "query": "What are the best [category] for [audience/use case]?" },
+    { "id": "use-case-1", "intent": "use_case", "query": "Which [category] is best when [specific constraint]?" },
+    { "id": "compare-1", "intent": "comparison", "query": "Compare the leading [category] for [decision criteria]." },
+    { "id": "price-1", "intent": "pricing", "query": "How much do good [category] cost, and which offers the best value?" },
+    { "id": "alternative-1", "intent": "alternatives", "query": "What are the best alternatives to [known competitor]?" },
+    { "id": "risk-1", "intent": "limitations", "query": "What are the limitations or risks of using [category]?" },
+    { "id": "trust-1", "intent": "trust", "query": "Which [category] providers are most trustworthy, and why?" },
+    { "id": "brand-1", "intent": "branded_accuracy", "query": "What is [brand], who is it for, and what are its main strengths and weaknesses?" }
+  ],
+  "capture": [
+    "brandMentioned",
+    "domainCited",
+    "citationUrls",
+    "mentionPosition",
+    "recommendationStrength",
+    "sentiment",
+    "factualErrors",
+    "competitorsMentioned",
+    "answerTimestamp"
+  ]
+}
