@@ -41,6 +41,11 @@ test("analyzeRobots detects explicit full-site blocks", () => {
   assert.equal(result.bots.PerplexityBot, "unspecified");
 });
 
+test("analyzeRobots applies wildcard rules when no bot-specific group exists", () => {
+  const result = analyzeRobots("User-agent: *\nDisallow: /");
+  assert.equal(result.blocked.length, 6);
+});
+
 test("scoreSignals treats warnings as half credit and ignores zero-weight signals", () => {
   const score = scoreSignals([
     { weight: 10, status: "pass" },

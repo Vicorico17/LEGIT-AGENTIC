@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LEGIT AGENTIC — Website readiness audit</title>
+    <meta name="description" content="Run a transparent, evidence-based readiness audit for AI agents and answer engines.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="LEGIT AGENTIC home"><span>LEGIT</span> AGENTIC</a>
+      <a class="repo-link" href="https://github.com/Vicorico17/LEGIT-AGENTIC">GitHub ↗</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">OPEN METHODOLOGY · ZERO VANITY METRICS</p>
+        <h1 id="hero-title">Can AI agents actually <em>use</em> your website?</h1>
+        <p class="lede">Test access, extraction, structured facts, trust, navigation, and quotability. Every result includes its evidence and scoring weight.</p>
+        <form id="audit-form" class="audit-form">
+          <label for="target">Public website</label>
+          <div class="input-row">
+            <input id="target" name="target" type="text" inputmode="url" autocomplete="url" placeholder="example.com" required maxlength="2048">
+            <button type="submit">Run audit <span aria-hidden="true">→</span></button>
+          </div>
+          <p class="form-note">Read-only · up to 5 public pages · no login or form submission</p>
+        </form>
+      </section>
+
+      <section id="status" class="status" hidden aria-live="polite"></section>
+      <section id="results" class="results" hidden aria-labelledby="result-title">
+        <div class="result-head">
+          <div>
+            <p class="eyebrow">DETERMINISTIC READINESS</p>
+            <h2 id="result-title">Audit result</h2>
+            <p id="result-target" class="result-target"></p>
+          </div>
+          <div class="score" aria-label="Readiness score"><strong id="score-value">—</strong><span>/100</span><small id="grade-value">—</small></div>
+        </div>
+        <p class="scope">This score measures technical readiness. It does not claim to measure proprietary AI rankings or live citations.</p>
+        <div class="summary-grid">
+          <article><strong id="pass-count">0</strong><span>Passed</span></article>
+          <article><strong id="warn-count">0</strong><span>Warnings</span></article>
+          <article><strong id="fail-count">0</strong><span>Failed</span></article>
+          <article><strong id="page-count">0</strong><span>Pages sampled</span></article>
+        </div>
+        <div class="actions">
+          <button id="download-json" class="secondary" type="button">Download JSON</button>
+          <button id="download-md" class="secondary" type="button">Download Markdown</button>
+        </div>
+        <div id="signal-list" class="signal-list"></div>
+        <section class="next-step">
+          <p class="eyebrow">THE OTHER HALF</p>
+          <h2>Readiness is not visibility.</h2>
+          <p>Use the repository's repeatable buyer-query matrix to measure mentions, citations, accuracy, competitors, and change over time across answer engines.</p>
+          <a href="https://github.com/Vicorico17/LEGIT-AGENTIC/blob/main/methodology/query-template.json">Open the query template ↗</a>
+        </section>
+      </section>
+
+      <section class="method" aria-labelledby="method-title">
+        <p class="eyebrow">COMBINED RESEARCH</p>
+        <h2 id="method-title">Two scores. No category error.</h2>
+        <div class="method-grid">
+          <article><span>01</span><h3>Agent readiness</h3><p>Can machines access, extract, understand, navigate, and safely act?</p></article>
+          <article><span>02</span><h3>AI visibility</h3><p>Do answer engines mention, cite, recommend, and accurately describe the brand?</p></article>
+          <article><span>03</span><h3>Business outcome</h3><p>Do those surfaces produce qualified attention, trust, leads, or revenue?</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>LEGIT AGENTIC</span><span>Evidence over folklore.</span></footer>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

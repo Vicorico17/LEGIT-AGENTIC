@@ -12,6 +12,8 @@ Most “AI SEO” audits blur those questions into one opaque score. LEGIT AGENT
 
 This repository combines the most useful ideas exposed by [40RTY AgentIQ](https://audit.40rty.ai/audit) and [Boring Marketing's AI Visibility Audit](https://boringmarketing.com/audit), removes duplicated or speculative checks, and turns the result into a reusable standard and CLI.
 
+The repository also includes a responsive web interface and Vercel serverless endpoint for running the deterministic readiness audit without installing the CLI.
+
 > [!IMPORTANT]
 > A readiness score is not an AI ranking score. Passing every technical check does not guarantee that ChatGPT, Claude, Gemini, Perplexity, or Google will recommend a brand.
 

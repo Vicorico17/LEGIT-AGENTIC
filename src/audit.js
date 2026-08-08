@@ -30,22 +30,71 @@ function normalizeTarget(value) {
   return url;
 }
 
+function isPrivateAddress(address) {
+  const value = address.toLowerCase().replace(/^\[|\]$/g, "");
+  if (value === "::" || value === "::1" || value.startsWith("fc") || value.startsWith("fd") || /^fe[89ab]/.test(value) || value.startsWith("2001:db8:")) return true;
+  const mapped = value.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/)?.[1];
+  const ipv4 = mapped || (/^\d+\.\d+\.\d+\.\d+$/.test(value) ? value : null);
+  if (!ipv4) return false;
+  const parts = ipv4.split(".").map(Number);
+  if (parts.some((part) => part < 0 || part > 255)) return true;
+  const [a, b, c] = parts;
+  return a === 0 || a === 10 || a === 127 || a >= 224
+    || (a === 100 && b >= 64 && b <= 127)
+    || (a === 169 && b === 254)
+    || (a === 172 && b >= 16 && b <= 31)
+    || (a === 192 && b === 0)
+    || (a === 192 && b === 168)
+    || (a === 198 && (b === 18 || b === 19))
+    || (a === 198 && b === 51 && c === 100)
+    || (a === 203 && b === 0 && c === 113);
+}
+
+async function assertPublicUrl(url) {
+  const hostname = url.hostname.toLowerCase();
+  if (!hostname || hostname === "localhost" || hostname.endsWith(".localhost") || hostname.endsWith(".local") || hostname.endsWith(".internal")) {
+    throw new Error("Private and local network targets are not allowed.");
+  }
+  if (url.username || url.password) throw new Error("URLs containing credentials are not allowed.");
+  if (url.port && !["80", "443"].includes(url.port)) throw new Error("Only standard HTTP and HTTPS ports are allowed.");
+  const { isIP } = await import("node:net");
+  if (isIP(hostname)) {
+    if (isPrivateAddress(hostname)) throw new Error("Private and reserved IP targets are not allowed.");
+    return;
+  }
+  const { lookup } = await import("node:dns/promises");
+  const addresses = await lookup(hostname, { all: true, verbatim: true });
+  if (!addresses.length || addresses.some(({ address }) => isPrivateAddress(address))) {
+    throw new Error("The target resolves to a private or reserved network address.");
+  }
+}
+
 async function request(url, timeoutMs, accept = "text/html,application/xhtml+xml") {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(url, {
-      redirect: "follow",
-      signal: controller.signal,
-      headers: { "user-agent": USER_AGENT, accept },
-    });
-    return {
-      ok: response.ok,
-      status: response.status,
-      url: response.url,
-      contentType: response.headers.get("content-type") || "",
-      text: await response.text(),
-    };
+    let current = new URL(url);
+    for (let redirectCount = 0; redirectCount <= 5; redirectCount += 1) {
+      await assertPublicUrl(current);
+      const response = await fetch(current, {
+        redirect: "manual",
+        signal: controller.signal,
+        headers: { "user-agent": USER_AGENT, accept },
+      });
+      if (response.status >= 300 && response.status < 400 && response.headers.get("location")) {
+        current = new URL(response.headers.get("location"), current);
+        if (!["http:", "https:"].includes(current.protocol)) throw new Error("Redirected to an unsupported protocol.");
+        continue;
+      }
+      return {
+        ok: response.ok,
+        status: response.status,
+        url: current.href,
+        contentType: response.headers.get("content-type") || "",
+        text: await response.text(),
+      };
+    }
+    throw new Error("Too many redirects.");
   } catch (error) {
     return { ok: false, status: 0, url: String(url), contentType: "", text: "", error: error.message };
   } finally {
