@@ -2,3 +2,4 @@ audit.json
 AGENTIC-AUDIT.md
 node_modules/
 .DS_Store
+.vercel

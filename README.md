@@ -14,6 +14,8 @@ This repository combines the most useful ideas exposed by [40RTY AgentIQ](https:
 
 The repository also includes a responsive web interface and Vercel serverless endpoint for running the deterministic readiness audit without installing the CLI.
 
+**Live web audit:** [legit-agentic.vercel.app](https://legit-agentic.vercel.app)
+
 > [!IMPORTANT]
 > A readiness score is not an AI ranking score. Passing every technical check does not guarantee that ChatGPT, Claude, Gemini, Perplexity, or Google will recommend a brand.
 
