@@ -70,6 +70,21 @@
         <div class="actions">
           <button id="download-json" class="secondary" type="button">Download JSON</button>
           <button id="download-md" class="secondary" type="button">Download Markdown</button>
+          <button id="copy-summary" class="secondary" type="button">Copy score summary</button>
+          <button id="new-audit" class="secondary" type="button">Score another site</button>
+        </div>
+        <div class="score-detail-grid">
+          <section class="category-score" aria-labelledby="category-title">
+            <p class="eyebrow">SCORE BY CATEGORY</p>
+            <h3 id="category-title">Where your business is ready.</h3>
+            <div id="category-list"></div>
+          </section>
+          <section class="opportunities" aria-labelledby="opportunity-title">
+            <p class="eyebrow">FREE PREVIEW</p>
+            <h3 id="opportunity-title">Your biggest opportunities.</h3>
+            <div id="opportunity-list"></div>
+            <p class="locked-note">🔒 The exact fix and implementation brief are included in the paid plan.</p>
+          </section>
         </div>
         <div class="upgrade-card">
           <div>
@@ -80,6 +95,14 @@
           <a class="upgrade-link" href="#pricing">See the paid plans <span aria-hidden="true">↓</span></a>
         </div>
         <div id="signal-list" class="signal-list"></div>
+        <section class="history" aria-labelledby="history-title">
+          <div>
+            <p class="eyebrow">LOCAL SCORE HISTORY</p>
+            <h3 id="history-title">Track your progress.</h3>
+            <p>Recent scores are stored only in this browser so you can see improvement over time.</p>
+          </div>
+          <div id="score-history" class="history-list"></div>
+        </section>
         <section class="next-step">
           <p class="eyebrow">THE SCORE PROMISE</p>
           <h2>Become the business agents can recommend.</h2>
