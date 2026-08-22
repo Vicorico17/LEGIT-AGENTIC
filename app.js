@@ -36,7 +36,7 @@ function render(report) {
       <div class="signal-top"><span class="pill">${escapeHtml(signal.status)}</span><span class="category">${escapeHtml(signal.category)}</span><span class="weight">${signal.weight ? `${signal.weight} pts` : "unscored"}</span></div>
       <h3>${escapeHtml(signal.id.replaceAll("-", " "))}</h3>
       <p class="evidence">${escapeHtml(signal.evidence)}</p>
-      ${signal.status === "pass" ? "" : `<p class="recommendation">${escapeHtml(signal.recommendation)}</p>`}
+      ${signal.status === "pass" ? "" : `<p class="recommendation recommendation--locked">🔒 Improvement recommendation included in the paid ACORE plan.</p>`}
     </article>`).join("");
   results.hidden = false;
   results.scrollIntoView({ behavior: "smooth", block: "start" });
